@@ -23,7 +23,7 @@ const markup = images
   
 const pictures = document.querySelectorAll('.picture')
 
-list.style.display = 'flex';
+list.style.flex-wrap ;
 list.style.flexWrap = 'column-reverse'
 list.style.listStyle = 'none'
 list.style.gap = '20px'
