@@ -1,35 +1,38 @@
-// const inputNum = document.querySelector('#controls>input')
-// const btnCreate = document.querySelector('button[data-create]')
-// const btnDestroy = document.querySelector('button[data-destroy]')
-// const boxes = document.querySelector('#boxes')
+const boxesRef = document.querySelector("#boxes");
+const inputRef = document.querySelector('[type="number"]');
+const btnCreateRef = document.querySelector("[data-create]");
+const btnDestroyRef = document.querySelector("[data-destroy]");
 
-// function getRandomHexColor() {
-// 	return `#${Math.floor(Math.random() * 16777215).toString(16)}`
-// }
+let size = 30;
 
-// const createBoxes = amount => {
-// 	const elementsToAdd = []
-// 	for (let i = 0; i < amount; i++) {
-// 		const div = document.createElement('div')
-// 		div.style.height = `${30 + 10 * i}px`
-// 		div.style.width = `${30 + 10 * i}px`
-// 		div.style.background = getRandomHexColor()
-// 		elementsToAdd.push(div)
-// 	}
-// 	return elementsToAdd
-// }
+const createBoxes = (amount) => {
+    amount = inputRef.value;
+    const arr = [];
 
-// const destroyBoxes = () => {
-// 	boxes.innerHTML = ''
-// }
+    for (let i = 0; i < amount; i += 1) {
+        const createDiv = document.createElement("div");
+        createDiv.style.width = `${size}px`;
+        createDiv.style.height = `${size}px`;
+        createDiv.style.backgroundColor = getRandomHexColor();
+        size += 10;
+        
+        arr.push(createDiv);
+    }
+    inputRef.value = "";
+    boxesRef.append(...arr);
+};
 
-// btnCreate.addEventListener('click', () => {
-// 	let boxesToAdd = createBoxes(inputNum.value)
-// 	boxes.append(...boxesToAdd)
-// })
+btnCreateRef.addEventListener("click", createBoxes);
 
-// console.log(inputNum.value)
+const destroyBoxes = () => {
+    boxesRef.innerHTML = "";
+    size = 30;
+};
 
-// btnDestroy.addEventListener('click', () => {
-// 	destroyBoxes.call()
-// })
+btnDestroyRef.addEventListener("click", destroyBoxes);
+
+function getRandomHexColor() {
+    return `#${Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, 0)}`;
+}
